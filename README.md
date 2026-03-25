@@ -36,15 +36,22 @@ The confidence switching ensemble outperforms all standard ensemble approaches b
 ## Pipeline
 
 ```
-graph TD
-    A[Raw Sector Data] --> B(Regime Analysis & EDA)
-    B --> C(PCA: 35 to 11 Features)
-    C --> D{Model Testing}
-    D --> E[Baseline: SARIMA]
-    D --> F[Non-linear: XGBoost]
-    D --> G[Final: Confidence Ensemble]
-    G --> H(114-Step Walk-Forward Validation)
-    H --> I[Result: p < 0.001 Significance]
+[ Raw Sector Data ]
+        |
+        ▼
+[ Regime Analysis ]  -->  Identifies training windows
+        |
+        ▼
+[ PCA Reduction ]    -->  35 Features to 11 (80% Variance)
+        |
+        ▼
+[  Model Testing  ]  -->  SARIMA | SARIMAX | XGBoost
+        |
+        ▼
+[ Final Ensemble  ]  -->  Confidence Switching Logic
+        |
+        ▼
+[   Validation    ]  -->  114-step Walk-Forward (p < 0.001)
 ```
 
 ---
